@@ -1,0 +1,144 @@
+{
+  "asset": {
+    "generator": "gltfeditor.com",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAEAAAAAAAAAAAAAAAAAlAIC/mpn9QQAAAEAAAAAAAAAAAAAAAAAlAIC/AAAAAAAAAAAAAAAAAAAAAAAAAAAlAIC/mpn9QQAAAAAAAAAAAAAAAAAAAAAlAIC/AAAAAAAAAEAAAGhCJQCAvwAAAIAAAACAAAAAAAAAAEAAAAAAJQCAvwAAAIAAAACAAAAAAAAAAAAAAGhCJQCAvwAAAIAAAACAAAAAAAAAAAAAAAAAJQCAvwAAAIAAAACASsyPQgAAAEAAAGhCAAAAAAAAAAAlAIA/AAAAAAAAAEAAAGhCAAAAAAAAAAAlAIA/SsyPQgAAAAAAAGhCAAAAAAAAAAAlAIA/AAAAAAAAAAAAAGhCAAAAAAAAAAAlAIA/SsyPQgAAAEAzM0dCJQCAPwAAAAAAAACASsyPQgAAAEAAAGhCJQCAPwAAAAAAAACASsyPQgAAAAAzM0dCJQCAPwAAAAAAAACASsyPQgAAAAAAAGhCJQCAPwAAAAAAAACAmpn9QQAAAEAAAAAAbTNHPwAAAAD2yyC/SsyPQgAAAEAzM0dCbTNHPwAAAAD2yyC/mpn9QQAAeqYAAAAAbTNHPwAAAAD2yyC/SsyPQgAAeqYzM0dCbTNHPwAAAAD2yyC/mpn9QQAAAEAAAAAAAAAAACUAgD8AAACAAAAAAAAAAEAAAAAAAAAAACUAgD8AAACASsyPQgAAAEAzM0dCAAAAACUAgD8AAACAAAAAAAAAAEAAAGhCAAAAACUAgD8AAACASsyPQgAAAEAAAGhCAAAAACUAgD8AAACAAAAAAAAAAAAAAAAAAAAAACUAgL8AAAAAmpn9QQAAAAAAAAAAAAAAACUAgL8AAAAAAAAAAAAAAAAAAGhCAAAAACUAgL8AAAAASsyPQgAAAAAzM0dCAAAAACUAgL8AAAAASsyPQgAAAAAAAGhCAAAAACUAgL8AAAAAAAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAFgAXABgAGQAaABsAGwAaABwAGwAcAB0A",
+      "byteLength": 816
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 720,
+      "byteStride": 24,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 720,
+      "byteLength": 96,
+      "target": 34963
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "normalized": false,
+      "count": 30,
+      "min": [
+        0,
+        -8.673617379884035e-16,
+        0
+      ],
+      "max": [
+        71.89900207519531,
+        2,
+        58
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 12,
+      "componentType": 5126,
+      "normalized": false,
+      "count": 30,
+      "min": [
+        -1.0000044107437134,
+        -1.0000044107437134,
+        -1.0000044107437134
+      ],
+      "max": [
+        1.0000044107437134,
+        1.0000044107437134,
+        1.0000044107437134
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 0,
+      "componentType": 5123,
+      "normalized": false,
+      "count": 48,
+      "min": [
+        0
+      ],
+      "max": [
+        29
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "20Patriot"
+    }
+  ],
+  "nodes": [
+    {
+      "extensions": {
+        "KHR_node_visibility": {
+          "visible": true
+        }
+      },
+      "mesh": 0
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "material": 0,
+          "mode": 4,
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.19607843137254902,
+          0.5058823529411764,
+          0.6196078431372549,
+          0.5099999999999998
+        ],
+        "metallicFactor": 1,
+        "roughnessFactor": 1
+      },
+      "emissiveFactor": [
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "BLEND",
+      "doubleSided": false,
+      "extensions": {
+        "KHR_materials_emissive_strength": {
+          "emissiveStrength": 0
+        }
+      }
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_node_visibility",
+    "KHR_materials_emissive_strength"
+  ]
+}
