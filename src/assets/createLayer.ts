@@ -73,18 +73,41 @@ export function CreateLayer(
         const sceneOriginMercator = MercatorCoordinate.fromLngLat(sceneCoords)
 
         // add nodes to scene
+
+        let first = false;
         for(const node of nodes){
             const nodeMercator = MercatorCoordinate.fromLngLat([node.long, node.lat]);
             const dNode = calcMeterOffset(nodeMercator, sceneOriginMercator);
-            const nodeMarker = new THREE.Mesh( // replace this with certain 3D objects depending on what kind of node
-                new THREE.SphereGeometry(0.5),
-                new THREE.MeshStandardMaterial({
-                    color: 'skyblue'
-                })
-            )
 
-            nodeMarker.position.set(dNode.dEastMeter, 1 + (node.floor - 1) * floorHeight, dNode.dNorthMeter);
-            scene.add(nodeMarker);
+            if (first == false){
+                const nodeMarker = new THREE.Mesh(
+                    new THREE.SphereGeometry(1),
+                    new THREE.MeshStandardMaterial({
+                        color: 'red',
+                    })
+                )
+                nodeMarker.position.set(dNode.dEastMeter, 1 + (node.floor - 1) * floorHeight, dNode.dNorthMeter);
+                scene.add(nodeMarker)
+                first = true;
+                continue;
+            }
+
+            if (node.kind == "poi"){
+                const nodeMarker = await loadModel("/endStar.gltf")
+                nodeMarker.position.set(dNode.dEastMeter, 1 + (node.floor - 1) * floorHeight, dNode.dNorthMeter)
+                scene.add(nodeMarker)
+            } else if (node.kind == "elevator"){
+                const nodeMarker = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.5),
+                    new THREE.MeshStandardMaterial({
+                        color: 'skyblue'
+                    })
+                )
+                nodeMarker.position.set(dNode.dEastMeter, 1 + (node.floor - 1) * floorHeight, dNode.dNorthMeter)
+                scene.add(nodeMarker)
+            } else {
+                continue;
+            }
         }
 
 
@@ -158,7 +181,7 @@ export function CreateLayer(
 
         // make both "arrows" (really need better name) invisible
         elevatorArrow.visible = false;
-        sphereArrow.visible = true; // not this one (for now)
+        sphereArrow.visible = false;
 
         const rawPoints: THREE.Vector3[] = [];
 
@@ -207,17 +230,17 @@ export function CreateLayer(
 
             progress += arrowSpeed;
 
-            // if we get to the end of the subpath
-            if (progress >= 1) {
-                subpathIndex++;
-                progress = 0;
-            }
-
             const pos = new THREE.Vector3().lerpVectors(start, end, progress); // move arrow along path
             sphereArrow.position.copy(pos); // have both elevator and sphere are rendered together and visibility is toggles
             elevatorArrow.position.copy(pos);
 
             requestAnimationFrame(animateArrowOnPath);
+
+            // if we get to the end of the subpath
+            if (progress >= 1) {
+                subpathIndex++;
+                progress = 0;
+            }
         }
 
         animateArrowOnPath();

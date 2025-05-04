@@ -19,13 +19,13 @@ const tempNodes: tempNode[] = [
         lat: 42.09248682590311,
         long: -71.26629410633672,
         floor: 1,
-        kind: "poi"
+        kind: "inter"
     },
     {
         lat: 42.09277375925052,
         long: -71.26599086652641,
         floor: 1,
-        kind: "poi"
+        kind: "inter"
     },
     {
         lat: 42.09324032652947,
@@ -43,7 +43,7 @@ const tempNodes: tempNode[] = [
         lat: 42.09277375925052,
         long: -71.26599086652641,
         floor: 2,
-        kind: "poi"
+        kind: "inter"
     },
     {
         lat: 42.09248682590311,
@@ -62,7 +62,7 @@ const tempNodes: tempNode[] = [
         lat: 42.09277375925052,
         long: -71.26599086652641,
         floor: 3,
-        kind: "poi"
+        kind: "inter"
     },
     {
         lat: 42.09324032652947,
