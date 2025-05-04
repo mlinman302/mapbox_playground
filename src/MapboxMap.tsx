@@ -10,8 +10,9 @@ type tempNode = {
     lat: number,
     long: number,
     floor: number,
-    kind: string
+    kind: "poi" | "elevator" | "inter"
 }
+
 
 const tempNodes: tempNode[] = [
     {
@@ -30,13 +31,13 @@ const tempNodes: tempNode[] = [
         lat: 42.09324032652947,
         long: -71.26658286746988,
         floor: 1,
-        kind: "poi"
+        kind: "elevator"
     },
     {
         lat: 42.09324032652947,
         long: -71.26658286746988,
         floor: 2,
-        kind: "poi"
+        kind: "elevator"
     },
     {
         lat: 42.09277375925052,
@@ -48,13 +49,13 @@ const tempNodes: tempNode[] = [
         lat: 42.09248682590311,
         long: -71.26629410633672,
         floor: 2,
-        kind: "poi"
+        kind: "elevator"
     },
     {
         lat: 42.09248682590311,
         long: -71.26629410633672,
         floor: 3,
-        kind: "poi"
+        kind: "elevator"
     },
 
     {
