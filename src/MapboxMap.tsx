@@ -21,16 +21,62 @@ const tempNodes: tempNode[] = [
         kind: "poi"
     },
     {
+        lat: 42.09277375925052,
+        long: -71.26599086652641,
+        floor: 1,
+        kind: "poi"
+    },
+    {
         lat: 42.09324032652947,
         long: -71.26658286746988,
         floor: 1,
         kind: "poi"
-    }
+    },
+    {
+        lat: 42.09324032652947,
+        long: -71.26658286746988,
+        floor: 2,
+        kind: "poi"
+    },
+    {
+        lat: 42.09277375925052,
+        long: -71.26599086652641,
+        floor: 2,
+        kind: "poi"
+    },
+    {
+        lat: 42.09248682590311,
+        long: -71.26629410633672,
+        floor: 2,
+        kind: "poi"
+    },
+    {
+        lat: 42.09248682590311,
+        long: -71.26629410633672,
+        floor: 3,
+        kind: "poi"
+    },
+
+    {
+        lat: 42.09277375925052,
+        long: -71.26599086652641,
+        floor: 3,
+        kind: "poi"
+    },
+    {
+        lat: 42.09324032652947,
+        long: -71.26658286746988,
+        floor: 3,
+        kind: "poi"
+    },
+
 ]
 
-// const buildingRotation: [number, number, number] = [0, 0, Math.PI/2 + Math.PI/10];
-// const buildingCoords: LngLatLike = [-71.26553640553078, 42.09268306821]
-const sceneCoords: LngLatLike = [-71.26599086652641, 42.09287375925052]
+const sceneCoords: LngLatLike = [-71.26599086652641, 42.09277375925052]
+const buildingCoords: LngLatLike = [-71.26646779246585, 42.093016005061315]
+const buildingPath: string = "/public/20Patriot.gltf"
+const buildingRotation: number = -Math.PI/10;
+const floorHeight = 20;
 
 const MapboxMap: React.FC = () => {
     const mapContainer = useRef<HTMLDivElement>(null);
@@ -41,13 +87,13 @@ const MapboxMap: React.FC = () => {
         const map: Map = new mapboxgl.Map({
             container: mapContainer.current as HTMLDivElement,
             style: "mapbox://styles/mapbox/light-v11",
-            center: sceneCoords,
+            center: [-71.26599086652641, 42.09287375925052],
             zoom: 18,
-            pitch: 60,
+            pitch: 0,
             antialias: true,
         });
 
-        CreateLayer(map, sceneCoords, tempNodes)
+        CreateLayer(map, sceneCoords, buildingCoords, buildingPath, buildingRotation, floorHeight, tempNodes)
 
         return () => map.remove();
     }, []);
