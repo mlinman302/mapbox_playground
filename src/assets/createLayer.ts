@@ -5,7 +5,6 @@ import { GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader.js";
 import {buildingAttributes} from "../MapboxMap.tsx";
 
 
-
 export function CreateLayer(
     map: mapboxgl.Map,
     attributes: buildingAttributes
@@ -254,20 +253,20 @@ export function CreateLayer(
             scene.add(floor)
 
             // add pngs to floors
-            // === FLOOR PLAN PNG OVERLAY FOR THIS FLOOR ===
             const myFloorPath = attributes.floorPlanPaths[i];
             const myTexture = new THREE.TextureLoader().load(myFloorPath);
 
-            const myGeometry = new THREE.PlaneGeometry(100, 100, 1, 1);
+            const myGeometry = new THREE.PlaneGeometry(attributes.imageConstants.width, attributes.imageConstants.height, 1, 1);
             const myMaterial = new THREE.MeshBasicMaterial({
                 map: myTexture,
                 transparent: true,
                 depthWrite: false,
                 side: THREE.DoubleSide})
 
+
             const myPlane = new THREE.Mesh(myGeometry, myMaterial);
             myPlane.rotateX(Math.PI/2)
-            myPlane.position.set(0, 4, 0);
+            myPlane.position.set(attributes.imageConstants.offsetEast, i * attributes.floorHeight, attributes.imageConstants.offsetNorth);
 
             scene.add(myPlane)
             // const textureLoader = new THREE.TextureLoader();
