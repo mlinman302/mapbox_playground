@@ -50,7 +50,7 @@ export function CreateLayer(
 
         // create light (objects black without it)
         const light = new THREE.DirectionalLight('white', 2);
-        light.position.set(50, 100, -30).normalize(); // noon light
+        light.position.set(50, 100, -30); // noon light
         scene.add(light);
 
         const amLight = new THREE.AmbientLight(0x404040, 5);
@@ -81,35 +81,35 @@ export function CreateLayer(
             const dNode = calcMeterOffset(nodeMercator, sceneOriginMercator);
 
             if (i === 0){
-                startNodeMarker.position.set(dNode.dEastMeter, 1 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
-                scene.add(endNodeMarker)
+                startNodeMarker.position.set(dNode.dEastMeter, 3 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
+                scene.add(startNodeMarker)
                 continue;
             }
 
             if (i === attributes.nodes.length - 1){
-                endNodeMarker.position.set(dNode.dEastMeter, 1 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
+                endNodeMarker.position.set(dNode.dEastMeter, 3 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
+                endNodeMarker.scale.set(2, 2, 2);
                 scene.add(endNodeMarker);
 
             } else if (attributes.nodes[i].kind == "elevator"){
                 const nodeMarker = new THREE.Mesh(
-                    new THREE.SphereGeometry(0.5),
+                    new THREE.BoxGeometry(2.0, 2.0, 2.0),
                     new THREE.MeshStandardMaterial({
                         color: 'skyblue'
                     })
                 )
-                nodeMarker.position.set(dNode.dEastMeter, 1 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
+                nodeMarker.position.set(dNode.dEastMeter, 3 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
                 scene.add(nodeMarker);
             }
         }
 
 
         // set path material params
-        const lineMaterial = new THREE.LineBasicMaterial({ color: 'blue' }); // normal path
+        const lineMaterial = new THREE.LineBasicMaterial({color: 'blue'}); // normal path
         const dashedMaterial = new THREE.LineDashedMaterial({ // elevator path (dashed)
             color: 'blue',
             dashSize: 1,
             gapSize: 0.5,
-            linewidth: 2
         });
 
 
@@ -127,13 +127,13 @@ export function CreateLayer(
 
             const fromVec = new THREE.Vector3(
                 dFromNode.dEastMeter,
-                1 + (from.floor - 1) * attributes.floorHeight,
+                3 + (from.floor - 1) * attributes.floorHeight,
                 dFromNode.dNorthMeter
             );
 
             const toVec = new THREE.Vector3(
                 dToNode.dEastMeter,
-                1 + (to.floor - 1) * attributes.floorHeight,
+                3 + (to.floor - 1) * attributes.floorHeight,
                 dToNode.dNorthMeter
             );
 
@@ -163,7 +163,7 @@ export function CreateLayer(
         );
 
         const elevatorArrow = new THREE.Mesh(
-            new THREE.BoxGeometry(2, 2, 2),
+            new THREE.BoxGeometry(3.5, 3.5, 3.5),
             new THREE.MeshStandardMaterial({ color: 'blue' })
         );
 
@@ -182,7 +182,7 @@ export function CreateLayer(
 
             rawPoints.push(new THREE.Vector3(
                 offset.dEastMeter,
-                1 + (attributes.nodes[i].floor - 1) * attributes.floorHeight,
+                3 + (attributes.nodes[i].floor - 1) * attributes.floorHeight,
                 offset.dNorthMeter
             ));
         }
