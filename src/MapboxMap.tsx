@@ -51,25 +51,25 @@ const tempNodes: tempNode[] = [
         floor: 2,
         kind: "elevator"
     },
-    {
-        lat: 42.09248682590311,
-        long: -71.26629410633672,
-        floor: 3,
-        kind: "elevator"
-    },
-
-    {
-        lat: 42.09277375925052,
-        long: -71.26599086652641,
-        floor: 3,
-        kind: "inter"
-    },
-    {
-        lat: 42.09324032652947,
-        long: -71.26658286746988,
-        floor: 3,
-        kind: "poi"
-    },
+    // {
+    //     lat: 42.09248682590311,
+    //     long: -71.26629410633672,
+    //     floor: 3,
+    //     kind: "elevator"
+    // },
+    //
+    // {
+    //     lat: 42.09277375925052,
+    //     long: -71.26599086652641,
+    //     floor: 3,
+    //     kind: "inter"
+    // },
+    // {
+    //     lat: 42.09324032652947,
+    //     long: -71.26658286746988,
+    //     floor: 3,
+    //     kind: "poi"
+    // },
 
 ]
 
@@ -77,7 +77,7 @@ const tempNodes: tempNode[] = [
 export type buildingAttributes = {
     sceneCoords: LngLatLike,
     buildingCoords: LngLatLike,
-    buildingPath: string,
+    buildingPaths: string[],
     buildingMaskPath: string,
     buildingRotation: number,
     floorHeight: number,
@@ -93,7 +93,7 @@ export type buildingAttributes = {
 // const Patriot20Building: buildingAttributes = {
 //     sceneCoords: Pat20SceneCoords,
 //     buildingCoords: Pat20BuildingCoords,
-//     buildingPath: "/public/Pat20Floor.glb",
+//     buildingPaths: ["/public/Pat20Floor.glb", "/public/Pat20Floor.glb", "/public/Pat20Floor.glb", "/public/Pat20Floor.glb"],
 //     buildingMaskPath: '/Pat20Exterior.glb',
 //     buildingRotation: -Math.PI/10,
 //     floorHeight: 20,
@@ -108,7 +108,7 @@ const Pat22BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.092487602677
 const Patriot22Building = {
     sceneCoords: Pat22SceneCoords,
     buildingCoords: Pat22BuildingCoords,
-    buildingPath: "/public/Pat22Floor.gltf",
+    buildingPaths: ["/public/Pat22Floor.gltf", "/public/Pat22Floor.gltf", "/public/Pat22Floor.gltf", "/public/Pat22Floor.gltf"],
     buildingMaskPath: "Pat20Exterior.glb",
     buildingRotation: -Math.PI/10,
     floorHeight: 20,
@@ -116,6 +116,21 @@ const Patriot22Building = {
     floorPlanPaths: [''],
     nodes: tempNodes,
 }
+
+// const MainSceneCoords: LngLatLike = [-71.106549430016, 42.335842853824396]
+// const MainBuildingCoords: LngLatLike = [-71.10636459548073, 42.33526357549587]
+// const MainBuildingMaskCoords: LngLatLike = [-71.10636459548073, 42.33526357549587]
+// const MainBuilding = {
+//     sceneCoords: MainSceneCoords,
+//     buildingCoords: MainBuildingCoords,
+//     buildingPaths: ["/MainFloor1.gltf", "/MainFloor2.gltf"], // one per floor
+//     buildingMaskPath: "/MainExterior.gltf",
+//     buildingRotation: 0,
+//     floorHeight: 45,
+//     buildingMaskCoords: MainBuildingMaskCoords,
+//     floorPlanPaths: [''],
+//     nodes: tempNodes,
+// }
 
 
 const MapboxMap: React.FC = () => {
@@ -127,9 +142,9 @@ const MapboxMap: React.FC = () => {
         const map: Map = new mapboxgl.Map({
             container: mapContainer.current as HTMLDivElement,
             style: "mapbox://styles/mapbox/light-v11",
-            center: [-71.26599086652641, 42.09287375925052],
+            center: Pat22BuildingCoords,
             zoom: 18,
-            pitch: 0,
+            pitch: 55,
             antialias: true,
         });
 

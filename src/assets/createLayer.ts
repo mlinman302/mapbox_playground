@@ -247,7 +247,7 @@ export function CreateLayer(
         // create all floors in scene
         for (let i = 0;i < numFloors; i++){
             console.log("asdf")
-            const floor =  await loadModel(attributes.buildingPath);
+            const floor =  await loadModel(attributes.buildingPaths[i]);
             floor.scale.multiply(new THREE.Vector3(1, 1, -1))
             floor.rotateY(attributes.buildingRotation)
             floor.position.set(dBuilding.dEastMeter, i * attributes.floorHeight - 1.8, dBuilding.dNorthMeter);
