@@ -82,6 +82,7 @@ export type buildingAttributes = {
     buildingRotation: number,
     floorHeight: number,
     buildingMaskCoords: LngLatLike,
+    floorPlanPaths: string[]
     nodes: tempNode[]
 };
 
@@ -89,7 +90,7 @@ export type buildingAttributes = {
 const Pat20SceneCoords: LngLatLike = [-71.26599086652641, 42.09277375925052]
 const Pat20BuildingCoords: LngLatLike = [-71.26646779246585, 42.093016005061315]
 const Pat20BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727]
-const Patriot20Building = {
+const Patriot20Building: buildingAttributes = {
     sceneCoords: Pat20SceneCoords,
     buildingCoords: Pat20BuildingCoords,
     buildingPath: "/public/Pat20Floor.glb",
@@ -97,7 +98,8 @@ const Patriot20Building = {
     buildingRotation: -Math.PI/10,
     floorHeight: 20,
     buildingMaskCoords: Pat20BuildingMaskCoords,
-    nodes: tempNodes
+    floorPlanPaths: [""],
+    nodes: tempNodes,
 }
 
 
