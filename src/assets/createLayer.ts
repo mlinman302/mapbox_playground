@@ -252,6 +252,47 @@ export function CreateLayer(
             floor.rotateY(attributes.buildingRotation)
             floor.position.set(dBuilding.dEastMeter, i * attributes.floorHeight - 1.8, dBuilding.dNorthMeter);
             scene.add(floor)
+
+            // add pngs to floors
+            // === FLOOR PLAN PNG OVERLAY FOR THIS FLOOR ===
+            const myFloorPath = attributes.floorPlanPaths[i];
+            const myTexture = new THREE.TextureLoader().load(myFloorPath);
+
+            const myGeometry = new THREE.PlaneGeometry(100, 100, 1, 1);
+            const myMaterial = new THREE.MeshBasicMaterial({
+                map: myTexture,
+                transparent: true,
+                depthWrite: false,
+                side: THREE.DoubleSide})
+
+            const myPlane = new THREE.Mesh(myGeometry, myMaterial);
+            myPlane.rotateX(Math.PI/2)
+            myPlane.position.set(0, 4, 0);
+
+            scene.add(myPlane)
+            // const textureLoader = new THREE.TextureLoader();
+
+
+            // textureLoader.load(floorTextures[i], (texture) => {
+            //     const planeWidth = 85;
+            //     const planeHeight = 66;
+            //
+            //     const material = new THREE.MeshBasicMaterial({
+            //         map: texture,
+            //         transparent: true,
+            //         depthWrite: false,
+            //         side: THREE.DoubleSide
+            //     });
+            //
+            //     const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+            //     const plane = new THREE.Mesh(geometry, material);
+            //
+            //     plane.rotation.x = -Math.PI / 2;
+            //     plane.rotateZ(buildingRotation * 10);
+            //     plane.rotateY(-Math.PI);
+            //     plane.position.set(dBuilding.dEastMeter + 43, i * floorHeight, dBuilding.dNorthMeter - 22); // same as building
+            //
+            //     scene.add(plane);
         }
 
 

@@ -93,8 +93,8 @@ export type buildingAttributes = {
 // const Patriot20Building: buildingAttributes = {
 //     sceneCoords: Pat20SceneCoords,
 //     buildingCoords: Pat20BuildingCoords,
-//     buildingPaths: ["/public/Pat20Floor.glb", "/public/Pat20Floor.glb", "/public/Pat20Floor.glb", "/public/Pat20Floor.glb"],
-//     buildingMaskPath: '/Pat20Exterior.glb',
+//     buildingPaths: ["/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb"],
+//     buildingMaskPath: '/20Patriot/PatExterior.glb',
 //     buildingRotation: -Math.PI/10,
 //     floorHeight: 20,
 //     buildingMaskCoords: Pat20BuildingMaskCoords,
@@ -102,20 +102,20 @@ export type buildingAttributes = {
 //     nodes: tempNodes,
 // }
 
-const Pat22SceneCoords: LngLatLike = [-71.26696722883923, 42.09258410491776]
-const Pat22BuildingCoords: LngLatLike = [-71.26697223199403, 42.09223043183033]
-const Pat22BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727]
-const Patriot22Building = {
-    sceneCoords: Pat22SceneCoords,
-    buildingCoords: Pat22BuildingCoords,
-    buildingPaths: ["/public/Pat22Floor.gltf", "/public/Pat22Floor.gltf", "/public/Pat22Floor.gltf", "/public/Pat22Floor.gltf"],
-    buildingMaskPath: "Pat20Exterior.glb",
-    buildingRotation: -Math.PI/10,
-    floorHeight: 20,
-    buildingMaskCoords: Pat22BuildingMaskCoords,
-    floorPlanPaths: [''],
-    nodes: tempNodes,
-}
+// const Pat22SceneCoords: LngLatLike = [-71.26696722883923, 42.09258410491776]
+// const Pat22BuildingCoords: LngLatLike = [-71.26697223199403, 42.09223043183033]
+// const Pat22BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727]
+// const Patriot22Building = {
+//     sceneCoords: Pat22SceneCoords,
+//     buildingCoords: Pat22BuildingCoords,
+//     buildingPaths: ["/22Patriot/Pat22Floor.gltf", "/22Patriot/Pat22Floor.gltf", "/22Patriot/Pat22Floor.gltf", "/22Patriot/Pat22Floor.gltf"],
+//     buildingMaskPath: "/20Patriot/PatExterior.glb",
+//     buildingRotation: -Math.PI/10,
+//     floorHeight: 20,
+//     buildingMaskCoords: Pat22BuildingMaskCoords,
+//     floorPlanPaths: [''],
+//     nodes: tempNodes,
+// }
 
 // const MainSceneCoords: LngLatLike = [-71.106549430016, 42.335842853824396]
 // const MainBuildingCoords: LngLatLike = [-71.10636459548073, 42.33526357549587]
@@ -123,8 +123,8 @@ const Patriot22Building = {
 // const MainBuilding = {
 //     sceneCoords: MainSceneCoords,
 //     buildingCoords: MainBuildingCoords,
-//     buildingPaths: ["/MainFloor1.gltf", "/MainFloor2.gltf"], // one per floor
-//     buildingMaskPath: "/MainExterior.gltf",
+//     buildingPaths: ["/Main/MainFloor1.gltf", "/Main/MainFloor2.gltf"], // one per floor
+//     buildingMaskPath: "/Main/MainExterior.gltf",
 //     buildingRotation: 0,
 //     floorHeight: 45,
 //     buildingMaskCoords: MainBuildingMaskCoords,
@@ -138,8 +138,8 @@ const Patriot22Building = {
 // const FaulknerBuilding = {
 //     sceneCoords: FaulknerSceneCoords,
 //     buildingCoords: FaulknerBuildingCoords,
-//     buildingPaths: ["/FaulknerFloor1.gltf"], // one per floor
-//     buildingMaskPath: "/FaulknerExterior.gltf",
+//     buildingPaths: ["/Faulkner/FaulknerFloor1.gltf"], // one per floor
+//     buildingMaskPath: "/Faulkner/FaulknerExterior.gltf",
 //     buildingRotation: 0,
 //     floorHeight: 45,
 //     buildingMaskCoords: FaulknerBuildingMaskCoords,
@@ -153,12 +153,12 @@ const ChestnutBuildingMaskCoords: LngLatLike = [-71.1500853668773, 42.3256933099
 const ChestnutBuilding = {
     sceneCoords: ChestnutSceneCoords,
     buildingCoords: ChestnutBuildingCoords,
-    buildingPaths: ["/ChestnutFloor1.gltf"], // one per floor
-    buildingMaskPath: "/ChestnutExterior.gltf",
+    buildingPaths: ["/Chestnut/ChestnutFloor1.gltf"], // one per floor
+    buildingMaskPath: "/Chestnut/ChestnutExterior.gltf",
     buildingRotation: 0,
     floorHeight: 25,
     buildingMaskCoords: ChestnutBuildingMaskCoords,
-    floorPlanPaths: [''],
+    floorPlanPaths: ['/Chestnut/ChestnutFloor1.png'],
     nodes: tempNodes,
 }
 
