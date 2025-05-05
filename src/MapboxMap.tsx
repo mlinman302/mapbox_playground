@@ -92,13 +92,25 @@ const Pat20BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.092487602677
 const Patriot20Building = {
     sceneCoords: Pat20SceneCoords,
     buildingCoords: Pat20BuildingCoords,
-    buildingPath: "/public/20Patriot.gltf",
+    buildingPath: "/public/Pat20Floor.glb",
     buildingMaskPath: '/Pat20Exterior.glb',
     buildingRotation: -Math.PI/10,
     floorHeight: 20,
     buildingMaskCoords: Pat20BuildingMaskCoords,
     nodes: tempNodes
 }
+
+
+// const Pat22SceneCoords: LngLatLike
+// const Pat22BuildingCoords: LngLatLike
+// const Pat22BuildingMaskCoords: LngLatLike
+// const Patriot22Building = {
+//     sceneCoords: Pat22SceneCoords,
+//     buildingCoords: Pat22BuildingCoords,
+//     buildingPath: "/public/Pat22Floor.glb",
+//     buildingMaskPath: "Pat20Exterior.glb",
+//     buildingRotation:
+// }
 
 
 const MapboxMap: React.FC = () => {
