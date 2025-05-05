@@ -6,7 +6,7 @@ import { myKey } from "./api_key.ts";
 import {CreateLayer} from "./assets/createLayer.ts";
 
 // temporary map data ( replace with actual data from backend)
-type tempNode = {
+export type tempNode = {
     lat: number,
     long: number,
     floor: number,
@@ -73,11 +73,33 @@ const tempNodes: tempNode[] = [
 
 ]
 
-const sceneCoords: LngLatLike = [-71.26599086652641, 42.09277375925052]
-const buildingCoords: LngLatLike = [-71.26646779246585, 42.093016005061315]
-const buildingPath: string = "/public/20Patriot.gltf"
-const buildingRotation: number = -Math.PI/10;
-const floorHeight = 20;
+
+export type buildingAttributes = {
+    sceneCoords: LngLatLike,
+    buildingCoords: LngLatLike,
+    buildingPath: string,
+    buildingMaskPath: string,
+    buildingRotation: number,
+    floorHeight: number,
+    buildingMaskCoords: LngLatLike,
+    nodes: tempNode[]
+};
+
+
+const Pat20SceneCoords: LngLatLike = [-71.26599086652641, 42.09277375925052]
+const Pat20BuildingCoords: LngLatLike = [-71.26646779246585, 42.093016005061315]
+const Pat20BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727]
+const Patriot20Building = {
+    sceneCoords: Pat20SceneCoords,
+    buildingCoords: Pat20BuildingCoords,
+    buildingPath: "/public/20Patriot.gltf",
+    buildingMaskPath: '/Pat20Exterior.glb',
+    buildingRotation: -Math.PI/10,
+    floorHeight: 20,
+    buildingMaskCoords: Pat20BuildingMaskCoords,
+    nodes: tempNodes
+}
+
 
 const MapboxMap: React.FC = () => {
     const mapContainer = useRef<HTMLDivElement>(null);
@@ -94,7 +116,7 @@ const MapboxMap: React.FC = () => {
             antialias: true,
         });
 
-        CreateLayer(map, sceneCoords, buildingCoords, buildingPath, buildingRotation, floorHeight, tempNodes)
+        CreateLayer(map, Patriot20Building)
 
         return () => map.remove();
     }, []);

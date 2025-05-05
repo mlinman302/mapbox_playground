@@ -2,29 +2,19 @@
 import {MercatorCoordinate} from "mapbox-gl";
 import * as THREE from "three";
 import { GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader.js";
+import {buildingAttributes} from "../MapboxMap.tsx";
 
 
-type tempNode = {
-    lat: number,
-    long: number,
-    floor: number,
-    kind: "poi" | "elevator" | "inter"
-}
 
 
 export function CreateLayer(
     map: mapboxgl.Map,
-    sceneCoords: mapboxgl.LngLatLike,
-    builidngCoords: mapboxgl.LngLatLike,
-    buildingPath: string,
-    buildingRotation: number,
-    floorHeight: number,
-    nodes: tempNode[]
+    attributes: buildingAttributes
 ) {
 
     // use the nodes to get how many floors to render
     let numFloors = 1;
-    for (const node of nodes){
+    for (const node of attributes.nodes){
         if (node.floor > numFloors){
             numFloors = node.floor
         }
@@ -61,52 +51,56 @@ export function CreateLayer(
         scene.scale.multiply(new THREE.Vector3(1, 1, -1));
 
         // create light (objects black without it)
-        const light = new THREE.DirectionalLight('white');
-        light.position.set(50, 70, -30).normalize(); // noon light
+        const light = new THREE.DirectionalLight('white', 2);
+        light.position.set(50, 100, -30).normalize(); // noon light
         scene.add(light);
+
+        const amLight = new THREE.AmbientLight(0x404040, 5);
+        scene.add(amLight)
+
+        // model generations:
+        const startNodeMarker = new THREE.Mesh(
+            new THREE.SphereGeometry(1),
+            new THREE.MeshStandardMaterial({
+                color: 'red',
+            })
+        )
+        const endNodeMarker = await loadModel("/endStar.gltf");
+
+        const buildingMask = await loadModel(attributes.buildingMaskPath)
 
 
         // debug
         scene.add(new THREE.AxesHelper(60))
 
         // scene origin coords
-        const sceneOriginMercator = MercatorCoordinate.fromLngLat(sceneCoords)
+        const sceneOriginMercator = MercatorCoordinate.fromLngLat(attributes.sceneCoords)
 
         // add nodes to scene
 
-        let first = false;
-        for(const node of nodes){
-            const nodeMercator = MercatorCoordinate.fromLngLat([node.long, node.lat]);
+        for(let i = 0; i < attributes.nodes.length; i++){
+            const nodeMercator = MercatorCoordinate.fromLngLat([attributes.nodes[i].long, attributes.nodes[i].lat]);
             const dNode = calcMeterOffset(nodeMercator, sceneOriginMercator);
 
-            if (first == false){
-                const nodeMarker = new THREE.Mesh(
-                    new THREE.SphereGeometry(1),
-                    new THREE.MeshStandardMaterial({
-                        color: 'red',
-                    })
-                )
-                nodeMarker.position.set(dNode.dEastMeter, 1 + (node.floor - 1) * floorHeight, dNode.dNorthMeter);
-                scene.add(nodeMarker)
-                first = true;
+            if (i === 0){
+                startNodeMarker.position.set(dNode.dEastMeter, 1 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
+                scene.add(endNodeMarker)
                 continue;
             }
 
-            if (node.kind == "poi"){
-                const nodeMarker = await loadModel("/endStar.gltf")
-                nodeMarker.position.set(dNode.dEastMeter, 1 + (node.floor - 1) * floorHeight, dNode.dNorthMeter)
-                scene.add(nodeMarker)
-            } else if (node.kind == "elevator"){
+            if (i === attributes.nodes.length - 1){
+                endNodeMarker.position.set(dNode.dEastMeter, 1 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
+                scene.add(endNodeMarker);
+
+            } else if (attributes.nodes[i].kind == "elevator"){
                 const nodeMarker = new THREE.Mesh(
                     new THREE.SphereGeometry(0.5),
                     new THREE.MeshStandardMaterial({
                         color: 'skyblue'
                     })
                 )
-                nodeMarker.position.set(dNode.dEastMeter, 1 + (node.floor - 1) * floorHeight, dNode.dNorthMeter)
-                scene.add(nodeMarker)
-            } else {
-                continue;
+                nodeMarker.position.set(dNode.dEastMeter, 1 + (attributes.nodes[i].floor - 1) * attributes.floorHeight, dNode.dNorthMeter);
+                scene.add(nodeMarker);
             }
         }
 
@@ -122,9 +116,9 @@ export function CreateLayer(
 
 
         // iterate over all subpaths to create full path
-        for (let i = 0; i < nodes.length - 1; i++) {
-            const from = nodes[i];
-            const to = nodes[i + 1];
+        for (let i = 0; i < attributes.nodes.length - 1; i++) {
+            const from = attributes.nodes[i];
+            const to = attributes.nodes[i + 1];
 
             const fromNodeMercator = MercatorCoordinate.fromLngLat([from.long, from.lat]);
             const toNodeMercator = MercatorCoordinate.fromLngLat([to.long, to.lat]);
@@ -135,13 +129,13 @@ export function CreateLayer(
 
             const fromVec = new THREE.Vector3(
                 dFromNode.dEastMeter,
-                1 + (from.floor - 1) * floorHeight,
+                1 + (from.floor - 1) * attributes.floorHeight,
                 dFromNode.dNorthMeter
             );
 
             const toVec = new THREE.Vector3(
                 dToNode.dEastMeter,
-                1 + (to.floor - 1) * floorHeight,
+                1 + (to.floor - 1) * attributes.floorHeight,
                 dToNode.dNorthMeter
             );
 
@@ -161,8 +155,6 @@ export function CreateLayer(
             // add subpath line to scene
             scene.add(line);
         }
-
-
 
         // animate icon along path
 
@@ -185,14 +177,14 @@ export function CreateLayer(
 
         const rawPoints: THREE.Vector3[] = [];
 
-        for (let i = 0; i < nodes.length; i++) {
+        for (let i = 0; i < attributes.nodes.length; i++) {
             // the same as the node scene positioning calculations
-            const nodeMercator = MercatorCoordinate.fromLngLat([nodes[i].long, nodes[i].lat]);
+            const nodeMercator = MercatorCoordinate.fromLngLat([attributes.nodes[i].long, attributes.nodes[i].lat]);
             const offset = calcMeterOffset(nodeMercator, sceneOriginMercator);
 
             rawPoints.push(new THREE.Vector3(
                 offset.dEastMeter,
-                1 + (nodes[i].floor - 1) * floorHeight,
+                1 + (attributes.nodes[i].floor - 1) * attributes.floorHeight,
                 offset.dNorthMeter
             ));
         }
@@ -211,7 +203,9 @@ export function CreateLayer(
                 progress = 0;
             }
 
-            if(nodes[subpathIndex].kind === "elevator" && subpathIndex + 1 < nodes.length && nodes[subpathIndex + 1].floor != nodes[subpathIndex].floor){
+            if(attributes.nodes[subpathIndex].kind === "elevator" &&
+                subpathIndex + 1 < attributes.nodes.length &&
+                attributes.nodes[subpathIndex + 1].floor != attributes.nodes[subpathIndex].floor){
                 elevatorArrow.visible = true;
                 sphereArrow.visible = false;
             } else{
@@ -248,21 +242,26 @@ export function CreateLayer(
 
 
         // calculate building location in scene
-        const buildingMercator = MercatorCoordinate.fromLngLat(builidngCoords);
+        const buildingMercator = MercatorCoordinate.fromLngLat(attributes.buildingCoords);
         const dBuilding = calcMeterOffset(buildingMercator, sceneOriginMercator);
 
         // create all floors in scene
         for (let i = 0;i < numFloors; i++){
             console.log("asdf")
-            const floor =  await loadModel(buildingPath);
-
-            const originAxes = new THREE.AxesHelper(2);
-            originAxes.position.set(0, 0, 0);
+            const floor =  await loadModel(attributes.buildingPath);
             floor.scale.multiply(new THREE.Vector3(1, 1, -1))
-            floor.rotateY(buildingRotation)
-            floor.position.set(dBuilding.dEastMeter, i * floorHeight - 1.8, dBuilding.dNorthMeter);
+            floor.rotateY(attributes.buildingRotation)
+            floor.position.set(dBuilding.dEastMeter, i * attributes.floorHeight - 1.8, dBuilding.dNorthMeter);
             scene.add(floor)
         }
+
+
+        const buildingMaskMercator = MercatorCoordinate.fromLngLat(attributes.buildingMaskCoords);
+        const dBuildingMask = calcMeterOffset(buildingMaskMercator, sceneOriginMercator);
+        buildingMask.position.set(dBuildingMask.dEastMeter, 0, dBuildingMask.dNorthMeter)
+        buildingMask.scale.multiply(new THREE.Vector3(1, 1, -1))
+        buildingMask.rotateY(attributes.buildingRotation)
+        scene.add(buildingMask)
 
 
         const renderer = new THREE.WebGLRenderer({
@@ -294,8 +293,19 @@ export function CreateLayer(
                     .scale(new THREE.Vector3(sceneTransform.scale, -sceneTransform.scale, sceneTransform.scale));
 
                 camera.projectionMatrix = m.multiply(l);
+
+                // const cameraWorldMatrix = camera.projectionMatrix.invert().transpose();
+                // const cameraRotation = new THREE.Quaternion().setFromRotationMatrix(cameraWorldMatrix);
+
+
                 renderer.resetState();
                 renderer.render(scene, camera);
+
+                // custom render updates
+                // endNodeMarker.setRotationFromQuaternion(cameraRotation);
+
+
+
                 map.triggerRepaint();
             }
         };
