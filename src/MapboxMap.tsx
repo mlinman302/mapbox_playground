@@ -87,32 +87,35 @@ export type buildingAttributes = {
 };
 
 
-const Pat20SceneCoords: LngLatLike = [-71.26599086652641, 42.09277375925052]
-const Pat20BuildingCoords: LngLatLike = [-71.26646779246585, 42.093016005061315]
-const Pat20BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727]
-const Patriot20Building: buildingAttributes = {
-    sceneCoords: Pat20SceneCoords,
-    buildingCoords: Pat20BuildingCoords,
-    buildingPath: "/public/Pat20Floor.glb",
-    buildingMaskPath: '/Pat20Exterior.glb',
+// const Pat20SceneCoords: LngLatLike = [-71.26599086652641, 42.09277375925052]
+// const Pat20BuildingCoords: LngLatLike = [-71.26646779246585, 42.093016005061315]
+// const Pat20BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727]
+// const Patriot20Building: buildingAttributes = {
+//     sceneCoords: Pat20SceneCoords,
+//     buildingCoords: Pat20BuildingCoords,
+//     buildingPath: "/public/Pat20Floor.glb",
+//     buildingMaskPath: '/Pat20Exterior.glb',
+//     buildingRotation: -Math.PI/10,
+//     floorHeight: 20,
+//     buildingMaskCoords: Pat20BuildingMaskCoords,
+//     floorPlanPaths: [""],
+//     nodes: tempNodes,
+// }
+
+const Pat22SceneCoords: LngLatLike = [-71.26696722883923, 42.09258410491776]
+const Pat22BuildingCoords: LngLatLike = [-71.26697223199403, 42.09223043183033]
+const Pat22BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727]
+const Patriot22Building = {
+    sceneCoords: Pat22SceneCoords,
+    buildingCoords: Pat22BuildingCoords,
+    buildingPath: "/public/Pat22Floor.gltf",
+    buildingMaskPath: "Pat20Exterior.glb",
     buildingRotation: -Math.PI/10,
     floorHeight: 20,
-    buildingMaskCoords: Pat20BuildingMaskCoords,
-    floorPlanPaths: [""],
+    buildingMaskCoords: Pat22BuildingMaskCoords,
+    floorPlanPaths: [''],
     nodes: tempNodes,
 }
-
-
-// const Pat22SceneCoords: LngLatLike
-// const Pat22BuildingCoords: LngLatLike
-// const Pat22BuildingMaskCoords: LngLatLike
-// const Patriot22Building = {
-//     sceneCoords: Pat22SceneCoords,
-//     buildingCoords: Pat22BuildingCoords,
-//     buildingPath: "/public/Pat22Floor.glb",
-//     buildingMaskPath: "Pat20Exterior.glb",
-//     buildingRotation:
-// }
 
 
 const MapboxMap: React.FC = () => {
@@ -130,7 +133,7 @@ const MapboxMap: React.FC = () => {
             antialias: true,
         });
 
-        CreateLayer(map, Patriot20Building)
+        CreateLayer(map, Patriot22Building)
 
         return () => map.remove();
     }, []);

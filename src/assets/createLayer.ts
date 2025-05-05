@@ -6,7 +6,6 @@ import {buildingAttributes} from "../MapboxMap.tsx";
 
 
 
-
 export function CreateLayer(
     map: mapboxgl.Map,
     attributes: buildingAttributes
