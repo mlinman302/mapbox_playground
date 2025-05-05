@@ -40,49 +40,49 @@ const tempNodes: tempNode[] = [
         floor: 1,
         kind: "elevator"
     },
-    // {
-    //     lat: 42.09324032652947,
-    //     long: -71.26658286746988,
-    //     floor: 2,
-    //     kind: "elevator"
-    // },
-    // {
-    //     lat: 42.09277375925052,
-    //     long: -71.26599086652641,
-    //     floor: 2,
-    //     kind: "inter"
-    // },
-    // {
-    //     lat: 42.09248682590311,
-    //     long: -71.26629410633672,
-    //     floor: 2,
-    //     kind: "elevator"
-    // },
-    // {
-    //     lat: 42.09248682590311,
-    //     long: -71.26629410633672,
-    //     floor: 3,
-    //     kind: "elevator"
-    // },
-    //
-    // {
-    //     lat: 42.09277375925052,
-    //     long: -71.26599086652641,
-    //     floor: 3,
-    //     kind: "inter"
-    // },
-    // {
-    //     lat: 42.09324032652947,
-    //     long: -71.26658286746988,
-    //     floor: 3,
-    //     kind: "poi"
-    // },
-    // {
-    //     lat: 42.09324032652947,
-    //     long: -71.26658286746988,
-    //     floor: 4,
-    //     kind: "poi"
-    // },
+    {
+        lat: 42.09324032652947,
+        long: -71.26658286746988,
+        floor: 2,
+        kind: "elevator"
+    },
+    {
+        lat: 42.09277375925052,
+        long: -71.26599086652641,
+        floor: 2,
+        kind: "inter"
+    },
+    {
+        lat: 42.09248682590311,
+        long: -71.26629410633672,
+        floor: 2,
+        kind: "elevator"
+    },
+    {
+        lat: 42.09248682590311,
+        long: -71.26629410633672,
+        floor: 3,
+        kind: "elevator"
+    },
+
+    {
+        lat: 42.09277375925052,
+        long: -71.26599086652641,
+        floor: 3,
+        kind: "inter"
+    },
+    {
+        lat: 42.09324032652947,
+        long: -71.26658286746988,
+        floor: 3,
+        kind: "poi"
+    },
+    {
+        lat: 42.09324032652947,
+        long: -71.26658286746988,
+        floor: 4,
+        kind: "poi"
+    },
 
 ]
 
@@ -101,20 +101,27 @@ export type buildingAttributes = {
 };
 
 
-// const Pat20SceneCoords: LngLatLike = [-71.26599086652641, 42.09277375925052]
-// const Pat20BuildingCoords: LngLatLike = [-71.26646779246585, 42.093016005061315]
-// const Pat20BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727]
-// const Patriot20Building: buildingAttributes = {
-//     sceneCoords: Pat20SceneCoords,
-//     buildingCoords: Pat20BuildingCoords,
-//     buildingPaths: ["/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb"],
-//     buildingMaskPath: '/20Patriot/PatExterior.glb',
-//     buildingRotation: -Math.PI/10,
-//     floorHeight: 20,
-//     buildingMaskCoords: Pat20BuildingMaskCoords,
-//     floorPlanPaths: [""],
-//     nodes: tempNodes,
-// }
+const Pat20SceneCoords: LngLatLike = [-71.26599086652641, 42.09277375925052];
+const Pat20BuildingCoords: LngLatLike = [-71.26646779246585, 42.093016005061315];
+const Pat20BuildingMaskCoords: LngLatLike = [-71.26629497632113, 42.09248760267727];
+const Pat22ImageConstants: imageConstants = {
+    width: 84,
+    height: 68,
+    offsetEast: 6,
+    offsetNorth: 5.0
+}
+const Patriot20Building: buildingAttributes = {
+    sceneCoords: Pat20SceneCoords,
+    buildingCoords: Pat20BuildingCoords,
+    buildingPaths: ["/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb", "/20Patriot/Pat20Floor.glb"],
+    buildingMaskPath: '/20Patriot/PatExterior.glb',
+    buildingRotation: -Math.PI/10,
+    floorHeight: 20,
+    buildingMaskCoords: Pat20BuildingMaskCoords,
+    floorPlanPaths: ["/20Patriot/Pat20Floor1.png", "/20Patriot/Pat20Floor2.png", "/20Patriot/Pat20Floor3.png", "/20Patriot/Pat20Floor4.png"],
+    nodes: tempNodes,
+    imageConstants: Pat22ImageConstants
+}
 
 // const Pat22SceneCoords: LngLatLike = [-71.26696722883923, 42.09258410491776]
 // const Pat22BuildingCoords: LngLatLike = [-71.26697223199403, 42.09223043183033]
@@ -138,27 +145,27 @@ export type buildingAttributes = {
 //     imageConstants: Pat22ImageConstants
 // }
 
-const MainSceneCoords: LngLatLike = [-71.106549430016, 42.335842853824396]
-const MainBuildingCoords: LngLatLike = [-71.10636459548073, 42.33526357549587]
-const MainBuildingMaskCoords: LngLatLike = [-71.10636459548073, 42.33526357549587]
-const MainImageConstants: imageConstants = {
-    width: 223,
-    height: 170,
-    offsetEast: 23,
-    offsetNorth: 13
-}
-const MainBuilding: buildingAttributes = {
-    sceneCoords: MainSceneCoords,
-    buildingCoords: MainBuildingCoords,
-    buildingPaths: ["/Main/MainFloor1.gltf", "/Main/MainFloor2.gltf"], // one per floor
-    buildingMaskPath: "/Main/MainExterior.gltf",
-    buildingRotation: 0,
-    floorHeight: 45,
-    buildingMaskCoords: MainBuildingMaskCoords,
-    floorPlanPaths: [''],
-    nodes: tempNodes,
-    imageConstants: MainImageConstants
-}
+// const MainSceneCoords: LngLatLike = [-71.106549430016, 42.335842853824396]
+// const MainBuildingCoords: LngLatLike = [-71.10636459548073, 42.33526357549587]
+// const MainBuildingMaskCoords: LngLatLike = [-71.10636459548073, 42.33526357549587]
+// const MainImageConstants: imageConstants = {
+//     width: 450,
+//     height: 230,
+//     offsetEast: -25,
+//     offsetNorth: 5
+// }
+// const MainBuilding: buildingAttributes = {
+//     sceneCoords: MainSceneCoords,
+//     buildingCoords: MainBuildingCoords,
+//     buildingPaths: ["/Main/MainFloor1.gltf", "/Main/MainFloor2.gltf"], // one per floor
+//     buildingMaskPath: "/Main/MainExterior.gltf",
+//     buildingRotation: 0,
+//     floorHeight: 45,
+//     buildingMaskCoords: MainBuildingMaskCoords,
+//     floorPlanPaths: ['/Main/MainFloor1.png', '/Main/MainFloor2.png'],
+//     nodes: tempNodes,
+//     imageConstants: MainImageConstants
+// }
 
 // const FaulknerSceneCoords: LngLatLike = [-71.12834142530612, 42.30150822410094]
 // const FaulknerBuildingCoords: LngLatLike = [-71.12855652822122, 42.300928445283546]
@@ -214,13 +221,13 @@ const MapboxMap: React.FC = () => {
         const map: Map = new mapboxgl.Map({
             container: mapContainer.current as HTMLDivElement,
             style: "mapbox://styles/mapbox/light-v11",
-            center: MainSceneCoords,
+            center: Pat20SceneCoords,
             zoom: 18,
             pitch: 55,
             antialias: true,
         });
 
-        CreateLayer(map, MainBuilding)
+        CreateLayer(map, Patriot20Building)
 
         return () => map.remove();
     }, []);
