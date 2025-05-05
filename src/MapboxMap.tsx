@@ -33,24 +33,24 @@ const tempNodes: tempNode[] = [
         floor: 1,
         kind: "elevator"
     },
-    {
-        lat: 42.09324032652947,
-        long: -71.26658286746988,
-        floor: 2,
-        kind: "elevator"
-    },
-    {
-        lat: 42.09277375925052,
-        long: -71.26599086652641,
-        floor: 2,
-        kind: "inter"
-    },
-    {
-        lat: 42.09248682590311,
-        long: -71.26629410633672,
-        floor: 2,
-        kind: "elevator"
-    },
+    // {
+    //     lat: 42.09324032652947,
+    //     long: -71.26658286746988,
+    //     floor: 2,
+    //     kind: "elevator"
+    // },
+    // {
+    //     lat: 42.09277375925052,
+    //     long: -71.26599086652641,
+    //     floor: 2,
+    //     kind: "inter"
+    // },
+    // {
+    //     lat: 42.09248682590311,
+    //     long: -71.26629410633672,
+    //     floor: 2,
+    //     kind: "elevator"
+    // },
     // {
     //     lat: 42.09248682590311,
     //     long: -71.26629410633672,
@@ -132,6 +132,36 @@ const Patriot22Building = {
 //     nodes: tempNodes,
 // }
 
+// const FaulknerSceneCoords: LngLatLike = [-71.12834142530612, 42.30150822410094]
+// const FaulknerBuildingCoords: LngLatLike = [-71.12855652822122, 42.300928445283546]
+// const FaulknerBuildingMaskCoords: LngLatLike = [-71.12855652822122, 42.300928445283546]
+// const FaulknerBuilding = {
+//     sceneCoords: FaulknerSceneCoords,
+//     buildingCoords: FaulknerBuildingCoords,
+//     buildingPaths: ["/FaulknerFloor1.gltf"], // one per floor
+//     buildingMaskPath: "/FaulknerExterior.gltf",
+//     buildingRotation: 0,
+//     floorHeight: 45,
+//     buildingMaskCoords: FaulknerBuildingMaskCoords,
+//     floorPlanPaths: [''],
+//     nodes: tempNodes,
+// }
+
+const ChestnutSceneCoords: LngLatLike = [-71.14974760810384, 42.325950820451]
+const ChestnutBuildingCoords: LngLatLike = [-71.1500853668773, 42.325693309988054]
+const ChestnutBuildingMaskCoords: LngLatLike = [-71.1500853668773, 42.325693309988054]
+const ChestnutBuilding = {
+    sceneCoords: ChestnutSceneCoords,
+    buildingCoords: ChestnutBuildingCoords,
+    buildingPaths: ["/ChestnutFloor1.gltf"], // one per floor
+    buildingMaskPath: "/ChestnutExterior.gltf",
+    buildingRotation: 0,
+    floorHeight: 25,
+    buildingMaskCoords: ChestnutBuildingMaskCoords,
+    floorPlanPaths: [''],
+    nodes: tempNodes,
+}
+
 
 const MapboxMap: React.FC = () => {
     const mapContainer = useRef<HTMLDivElement>(null);
@@ -142,13 +172,13 @@ const MapboxMap: React.FC = () => {
         const map: Map = new mapboxgl.Map({
             container: mapContainer.current as HTMLDivElement,
             style: "mapbox://styles/mapbox/light-v11",
-            center: Pat22BuildingCoords,
+            center: ChestnutSceneCoords,
             zoom: 18,
             pitch: 55,
             antialias: true,
         });
 
-        CreateLayer(map, Patriot22Building)
+        CreateLayer(map, ChestnutBuilding)
 
         return () => map.remove();
     }, []);
